@@ -1,0 +1,29 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Dependencies (CRITICAL)
+node_modules/
+
+# Environment Variables (CRITICAL)
+# This protects your MongoDB URI, Razorpay Secret, and JWT Secrets
+.env
+*.env
+
+# Uploads & Temp Files
+# If you ever save resumes to disk instead of memory, ignore that folder!
+uploads/
+temp/
+tmp/
+
+# Prisma specific (if using SQLite for local testing)
+*.db
+*.db-journal
+
+# Editor directories and files
+.vscode/
+.idea/
+.DS_Store

@@ -1,0 +1,311 @@
+@use "sass:color";
+
+// Design System Tokens
+$bg-dark-page: #121314;       // The dark workspace background
+$bg-card: #f3f6f6;            // Off-white surface background
+$text-title: #1a2b32;         // Slate-teal typography 
+$text-body: #2c3e50;
+$text-muted: #64748b;
+$border-color: #cbd5e1;
+$radius-lg: 24px;
+$radius-md: 14px;
+$radius-sm: 10px;
+
+$transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+// Full viewport backdrop container
+.page-wrapper {
+  background-color: $bg-dark-page;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+// Main Card Component
+.home {
+  background-color: $bg-card;
+  border-radius: $radius-lg;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+  width: 100%;
+  max-width: 1050px;
+  padding: 3.5rem;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2.5rem 4rem;
+  position: relative;
+
+  @media (min-width: 768px) {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  // 1. Header Section
+  // 1. Header Section
+  .form-header {
+    margin-bottom: 2rem;
+    position: relative;
+
+    h1 {
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: $text-title; // Fallback
+      line-height: 1.15;
+      letter-spacing: -0.035em;
+      margin: 0;
+      
+      // Base dark slate color for "Generate Your"
+      color: #1a2b32; 
+
+      // Beautiful metallic gradient split for "Interview Report"
+      br + span, 
+      span.gradient-text {
+        background: linear-gradient(135deg, #3d6a6e 0%, #a2824e 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        display: inline-block;
+      }
+
+      // Decorative premium accent dot at the end of the heading
+      &::after {
+        content: ".";
+        display: inline-block;
+        background: linear-gradient(135deg, #528184 0%, #c39d62 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        font-size: 2.8rem;
+        line-height: 0;
+        margin-left: -0.05em;
+      }
+    }
+
+    .subtitle {
+      font-size: 0.95rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.12em; // Elegant tracking
+      color: #528184;         // Matching the branding theme green
+      margin-top: 0.75rem;
+      opacity: 0.9;
+    }
+  }
+
+  // Layout Columns
+  .left, .right {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  // LOWER THE RIGHT PART IN DESKTOP VIEW
+  @media (min-width: 768px) {
+    .right {
+      // This exact margin pushes the right section down to align perfectly
+      // with the "Company Name" label across the row.
+      margin-top: 7rem; 
+    }
+  }
+
+  // 3. Form Input Styling
+  .input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+
+    label {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: $text-title;
+    }
+
+    // Input Group Inline Icon Setup
+    .input-with-icon {
+      position: relative;
+      display: flex;
+      align-items: center;
+
+      .icon {
+        position: absolute;
+        left: 1rem;
+        font-size: 1.1rem;
+        opacity: 0.6;
+        pointer-events: none;
+      }
+
+      input[type="text"] {
+        padding-left: 2.8rem;
+      }
+    }
+
+    input[type="text"],
+    textarea {
+      width: 100%;
+      padding: 1rem 1.2rem;
+      font-size: 0.95rem;
+      background-color: #ffffff;
+      border: 1px solid $border-color;
+      border-radius: $radius-md;
+      color: $text-body;
+      transition: $transition-smooth;
+      box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.02);
+
+      &::placeholder {
+        color: color.adjust($text-muted, $lightness: 15%);
+        white-space: pre-line;
+        line-height: 1.4;
+      }
+
+      &:focus {
+        outline: none;
+        border-color: #558b8f;
+        box-shadow: 0 0 0 4px rgba(85, 139, 143, 0.15);
+      }
+    }
+
+    textarea {
+      min-height: 160px;
+      resize: none;
+      line-height: 1.5;
+    }
+
+    // Relative containment setup for character counts
+    .textarea-container {
+      position: relative;
+      width: 100%;
+
+      .char-counter {
+        position: absolute;
+        bottom: -1.4rem;
+        right: 0.2rem;
+        font-size: 0.8rem;
+        font-weight: 600;
+        color: $text-muted;
+      }
+    }
+
+    // Custom File Selector Bar
+    .file-upload-wrapper {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      background-color: #ffffff;
+      padding: 0.75rem;
+      border: 1px solid $border-color;
+      border-radius: $radius-md;
+      width: 100%;
+
+      input[type="file"] {
+        font-size: 0.9rem;
+        color: $text-body;
+        cursor: pointer;
+
+        &::file-selector-button {
+          padding: 0.6rem 1.2rem;
+          margin-right: 0.8rem;
+          background: linear-gradient(135deg, #4d8286 0%, #5d9296 100%);
+          color: white;
+          border: none;
+          border-radius: $radius-sm;
+          font-weight: 600;
+          cursor: pointer;
+          transition: $transition-smooth;
+
+          &:hover {
+            opacity: 0.9;
+          }
+        }
+      }
+
+      .file-hint {
+        font-size: 0.75rem;
+        color: $text-muted;
+        line-height: 1.3;
+        max-width: 140px;
+      }
+    }
+  }
+
+  // 4. Centralized Layout Footer & Button Block
+  .bottom-actions {
+    grid-column: 1 / -1; // Forces full layout width alignment
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+    margin-top: 1rem;
+
+    .info-badge {
+      background-color: #ffffff;
+      padding: 0.6rem 1.5rem;
+      border-radius: $radius-sm;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: #2c3e50;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02);
+      border: 1px solid rgba($border-color, 0.5);
+      text-align: center;
+    }
+
+    .button.secondary-class-button {
+      width: 100%;
+      max-width: 480px;
+      padding: 1.1rem;
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #ffffff;
+      background: linear-gradient(90deg, #c39d62 0%, #528184 50%, #446d70 100%);
+      border: none;
+      border-radius: $radius-sm;
+      cursor: pointer;
+      box-shadow: 0 10px 20px rgba(77, 130, 134, 0.2);
+      transition: $transition-smooth;
+
+      &:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 12px 24px rgba(77, 130, 134, 0.3);
+        filter: brightness(1.04);
+      }
+
+      &:active {
+        transform: translateY(1px);
+      }
+    }
+
+    // Copyright & Metadata Row
+    .form-footer {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 1rem;
+      border-top: 1px solid rgba($border-color, 0.5);
+      padding-top: 1.2rem;
+
+      p {
+        font-size: 0.8rem;
+        color: $text-muted;
+        margin: 0;
+        font-weight: 500;
+      }
+
+      .inspected-tag {
+        display: flex;
+        align-items: center;
+        gap: 0.4rem;
+        background-color: #e2edea;
+        color: #3b6059;
+        font-size: 0.8rem;
+        font-weight: 700;
+        padding: 0.4rem 0.8rem;
+        border-radius: 20px;
+
+        .sparkle {
+          font-size: 0.85rem;
+        }
+      }
+    }
+  }
+}

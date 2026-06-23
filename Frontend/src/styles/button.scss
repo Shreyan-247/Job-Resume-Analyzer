@@ -1,0 +1,26 @@
+.button{
+    border: none;
+    outline: none;
+    padding-inline: 1.5rem;
+    padding-block: 0.78rem;
+    border-radius: 1rem;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.5s ease-in-out;
+
+    &.primary-class-button{
+        background-color: #33c758;
+        color: rgba(5, 5, 5, 0.884);
+        font-weight: bold;
+    }
+
+    &.secondary-class-button{
+        background-color: #ee1111;
+        color: rgb(245, 242, 242);
+        font-weight: bold;
+    }
+
+    &:active{
+        transform: scale(0.5);
+    }
+}

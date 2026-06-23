@@ -1,0 +1,32 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Subscription {
+  id                       String   @id @default(uuid())
+
+  mongoUserId              String   @unique
+
+  reportsGenerated         Int @default(0)
+
+  usageResetDate           DateTime @default(now())
+
+  razorpayCustomerId       String?
+
+  razorpaySubscriptionId   String?  @unique
+
+  plan                     String   @default("FREE")
+
+  status                   String   @default("inactive")
+
+  currentPeriodEnd         DateTime?
+
+  createdAt                DateTime @default(now())
+
+  updatedAt                DateTime @updatedAt
+}
